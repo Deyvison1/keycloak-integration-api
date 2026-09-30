@@ -1,0 +1,34 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+    }
+
+    plugins {
+        id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+
+    repositories {
+        // Dependências públicas
+        mavenCentral()
+
+        // Dependências internas / Nexus
+        maven {
+            url = uri('https://nexus.animal-adoption.com.br/repository/maven-public/')
+
+            credentials {
+                username = 'admin'
+                password = 'nexus123ateo9'
+            }
+        }
+
+        mavenLocal()
+    }
+}
+
+rootProject.name = 'keycloak-integration-api'

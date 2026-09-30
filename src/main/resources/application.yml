@@ -1,0 +1,33 @@
+quarkus:
+  oidc:
+    auth-server-url: https://auth.animal-adoption.com.br/realms/MY_KEYCLOAK
+    client-id: NETWORK-API-CLIENT
+    credentials:
+      secret: ${NETWORK_API_CLIENT_SECRET}
+
+  keycloak:
+    admin-client:
+      server-url: https://auth.animal-adoption.com.br
+      realm: MY_KEYCLOAK
+      client-id: KEYCLOAK_INTEGRATION_API_CLIENT
+      client-secret: ${KEYCLOAK_CLIENT_SECRET}
+      grant-type: client-credentials
+
+  http:
+    port: 8085
+
+    cors:
+      enabled: true
+      origins: http://localhost:4200,http://localhost:4201
+      methods: GET,POST,PUT,DELETE,OPTIONS
+      headers: Content-Type,Authorization
+
+    auth:
+      permission:
+        api:
+          paths:
+            - /api/*
+          policy: authenticated
+
+keycloak:
+  realm: MY_KEYCLOAK
