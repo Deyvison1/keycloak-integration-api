@@ -2,15 +2,15 @@ quarkus:
   oidc:
     auth-server-url: https://auth.supreme-network.site/realms/MY_KEYCLOAK
     client-id: NETWORK-API-CLIENT
-    credentials:
-      secret: 
+    credentials: 
+      secret: LYMF13TSrpSole7HUjlqiWVxreWbKoRG
 
   keycloak:
     admin-client:
       server-url: https://auth.supreme-network.site
       realm: MY_KEYCLOAK
       client-id: KEYCLOAK_INTEGRATION_API_CLIENT
-      client-secret: ${KEYCLOAK_CLIENT_SECRET}
+      client-secret: wNlaDfDsceHLne1eE6cc2tswEihiXX01
       grant-type: client-credentials
 
   http:
