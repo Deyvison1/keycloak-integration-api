@@ -1,0 +1,33 @@
+quarkus:
+  oidc:
+    auth-server-url: https://auth.supreme-network.site/realms/MY_KEYCLOAK
+    client-id: NETWORK-API-CLIENT
+    credentials:
+      secret: 
+
+  keycloak:
+    admin-client:
+      server-url: https://auth.supreme-network.site
+      realm: MY_KEYCLOAK
+      client-id: KEYCLOAK_INTEGRATION_API_CLIENT
+      client-secret: ${KEYCLOAK_CLIENT_SECRET}
+      grant-type: client-credentials
+
+  http:
+    port: 8085
+
+    cors:
+      enabled: true
+      origins: https://app.supreme-network.site,https://app-keycloak-integration.supreme-network.site
+      methods: GET,POST,PUT,DELETE,OPTIONS
+      headers: Content-Type,Authorization
+
+    auth:
+      permission:
+        api:
+          paths:
+            - /api/*
+          policy: authenticated
+
+keycloak:
+  realm: MY_KEYCLOAK

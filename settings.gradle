@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 
         // Dependências internas / Nexus
         maven {
-            url = uri('https://nexus.animal-adoption.com.br/repository/maven-public/')
+            url = uri('https://nexus.supreme-network.site/repository/maven-public/')
 
             credentials {
                 username = 'admin'
