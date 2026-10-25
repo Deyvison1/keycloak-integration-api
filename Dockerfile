@@ -16,6 +16,6 @@ ENV QUARKUS_PROFILE=docker
 
 COPY --from=builder /app/build/quarkus-app/ ./
 
-EXPOSE 8084
+EXPOSE 8085
 
 ENTRYPOINT ["java", "-jar", "quarkus-run.jar"]
