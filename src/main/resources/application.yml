@@ -1,13 +1,13 @@
 quarkus:
   oidc:
-    auth-server-url: https://auth.animal-adoption.com.br/realms/MY_KEYCLOAK
+    auth-server-url: https://auth.supreme-network.site/realms/MY_KEYCLOAK
     client-id: NETWORK-API-CLIENT
     credentials:
       secret: ${NETWORK_API_CLIENT_SECRET}
 
   keycloak:
     admin-client:
-      server-url: https://auth.animal-adoption.com.br
+      server-url: https://auth.supreme-network.site
       realm: MY_KEYCLOAK
       client-id: KEYCLOAK_INTEGRATION_API_CLIENT
       client-secret: ${KEYCLOAK_CLIENT_SECRET}
@@ -18,7 +18,7 @@ quarkus:
 
     cors:
       enabled: true
-      origins: http://localhost:4200,http://localhost:4201
+      origins: https://app-keycloak-integration.supreme-network.site, http://localhost:4200
       methods: GET,POST,PUT,DELETE,OPTIONS
       headers: Content-Type,Authorization
 

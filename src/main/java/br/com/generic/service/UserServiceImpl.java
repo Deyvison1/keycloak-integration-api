@@ -31,13 +31,18 @@ public class UserServiceImpl {
         this.jwt = jwt;
     }
 
-    public List<UserResponse> findAll() {
-        return keycloakClient
+    public List<UserResponse> findAll(int page, int size) {
+        List<UserResponse> users = keycloakClient
                 .users()
-                .list()
+                .list(page * size, size)
                 .stream()
                 .map(this::toResponse)
                 .toList();
+        return users;
+    }
+
+    public long count() {
+        return keycloakClient.users().count();
     }
 
     public UserResponse findById(String id) {

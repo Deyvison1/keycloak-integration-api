@@ -7,6 +7,7 @@ import br.com.generic.dto.request.UserUpdateRequest;
 import br.com.generic.service.UserServiceImpl;
 import br.com.sharedgeneric.dto.ApiResponse;
 import br.com.sharedgeneric.dto.ApiResponseDTO;
+import br.com.sharedgeneric.dto.PageApiResponseDTO;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -31,14 +32,17 @@ public class UserController extends BaseController {
 
     @GET
     @RolesAllowed({"USER", "USER_MANAGE"})
-    public ApiResponseDTO<List<UserResponse>> getAll() {
+    public PageApiResponseDTO<List<UserResponse>> getAll(@QueryParam("page") @DefaultValue("0") int page,
+                                                         @QueryParam("size") @DefaultValue("10") int size) {
 
-        List<UserResponse> users = userService.findAll();
+        List<UserResponse> users = userService.findAll(page, size);
+        long count = userService.count();
 
-            return ApiResponse.success(
-                ApiConstants.SUCCESS,
-                users,
-                getUriInfo().getRequestUri().getPath()
+            return ApiResponse.pageSuccess(
+                    ApiConstants.SUCCESS,
+                    users,
+                    getUriInfo().getRequestUri().getPath(),
+                    count
         );
     }
 
