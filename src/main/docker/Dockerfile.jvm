@@ -10,7 +10,7 @@
 # docker build -f src/main/docker/Dockerfile.jvm -t quarkus/keycloak-integration-api-jvm .
 #
 # Then run the container using:
-# 
+#
 # docker run -i --rm -p 8080:8080 quarkus/keycloak-integration-api-jvm
 #
 # If you want to include the debug port into your docker image
