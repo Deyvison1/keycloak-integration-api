@@ -8,6 +8,7 @@ import br.com.generic.mapper.UserMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.representations.JsonWebToken;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
@@ -18,13 +19,16 @@ public class UserServiceImpl {
 
     private final KeycloakClient keycloakClient;
     private final UserMapper userMapper;
+    private final JsonWebToken jwt;
 
     public UserServiceImpl(
             KeycloakClient keycloakClient,
-            UserMapper userMapper
+            UserMapper userMapper,
+            JsonWebToken jwt
     ) {
         this.keycloakClient = keycloakClient;
         this.userMapper = userMapper;
+        this.jwt = jwt;
     }
 
     public List<UserResponse> findAll() {
@@ -144,6 +148,15 @@ public class UserServiceImpl {
     }
 
     public void delete(String id) {
+
+        String authenticatedUserId = jwt.getSubject();
+
+        if (authenticatedUserId.equals(id)) {
+            throw new IllegalArgumentException(
+                    "Você não pode excluir seu próprio usuário."
+            );
+        }
+
         keycloakClient
                 .users()
                 .get(id)
@@ -166,6 +179,8 @@ public class UserServiceImpl {
                 ))
                 .toList();
 
+        boolean canDelete = !user.getId().equals(jwt.getSubject());
+
         return new UserResponse(
                 response.id(),
                 response.username(),
@@ -174,7 +189,8 @@ public class UserServiceImpl {
                 response.lastName(),
                 response.enabled(),
                 response.emailVerified(),
-                roles
+                roles,
+                canDelete
         );
     }
 }

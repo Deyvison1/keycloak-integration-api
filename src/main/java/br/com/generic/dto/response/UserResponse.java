@@ -11,5 +11,6 @@ public record UserResponse(
         String lastName,
         Boolean enabled,
         Boolean emailVerified,
-        List<RoleResponse> roles
+        List<RoleResponse> roles,
+        boolean canDelete
 ) {}
