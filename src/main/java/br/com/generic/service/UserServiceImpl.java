@@ -8,7 +8,7 @@ import br.com.generic.mapper.UserMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.resource.UserResource;
-import org.keycloak.representations.JsonWebToken;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
