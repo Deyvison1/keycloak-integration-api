@@ -19,10 +19,17 @@ public class RoleServiceImpl {
                 .roles()
                 .list()
                 .stream()
+                .filter(role ->
+                        !role.getName().equals("uma_authorization") &&
+                                !role.getName().equals("offline_access")
+                )
                 .map(role -> new RoleResponse(
                         role.getId(),
-                        role.getName()
+                        role.getName().startsWith("default-roles-")
+                                ? "Role padrão"
+                                : role.getName()
                 ))
                 .toList();
     }
+
 }
